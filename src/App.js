@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import List from './components/List';
 
-function App() {
+export default function App() {
+  const [list, setList] = useState(
+    [
+      {
+        id: 1,
+        name: "Mai",
+        checked: false
+      },
+      {
+        id: 2,
+        name: "Anh",
+        checked: false
+      },
+      {
+        id: 3,
+        name: "Dao",
+        checked: false
+      }
+    ]
+  );
+
+  const handleCheck = id => {
+    const newList = [...list];
+    const index = newList.findIndex(item => item.id === id);
+    const item = {...newList[index]};
+    item.checked = !item.checked;
+    newList[index] = item;
+    setList(newList);
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <List list={list} onCheck={handleCheck} />
     </div>
-  );
+  )
 }
-
-export default App;
