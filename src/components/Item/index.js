@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 function Item(props) {
   const { item, onCheck } = props;
   const { id, name, checked } = item;
+  
   return (
     <div>
       <h2>{name}</h2>
